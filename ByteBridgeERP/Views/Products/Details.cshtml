@@ -1,0 +1,4 @@
+@model Product
+@{ ViewData["Title"] = "Product details"; }
+<div class="page-heading"><div><div class="eyebrow">Inventory / Details</div><h1>@Model.Name</h1><p class="subheading">SKU: @Model.SKU</p></div><div class="action-links"><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit product</a><a asp-action="Index" class="btn btn-outline-secondary">Back</a></div></div>
+<div class="form-card"><dl class="row mb-0"><dt class="col-sm-4">SKU / Code</dt><dd class="col-sm-8">@Model.SKU</dd><dt class="col-sm-4">Category</dt><dd class="col-sm-8">@(Model.Category ?? "—")</dd><dt class="col-sm-4">Unit price</dt><dd class="col-sm-8">R @Model.UnitPrice.ToString("N2")</dd><dt class="col-sm-4">Stock quantity</dt><dd class="col-sm-8">@Model.StockQuantity</dd><dt class="col-sm-4">Reorder level</dt><dd class="col-sm-8">@Model.ReorderLevel</dd><dt class="col-sm-4">Description</dt><dd class="col-sm-8">@(Model.Description ?? "—")</dd></dl></div>

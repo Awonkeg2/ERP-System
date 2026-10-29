@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+bytebridge-erp.db
+bytebridge-erp.db-shm
+bytebridge-erp.db-wal

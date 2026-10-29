@@ -1,0 +1,11 @@
+@model Account
+@{ ViewData["Title"] = "Add account"; }
+<div class="page-heading"><div><div class="eyebrow">Finance / Chart of accounts</div><h1>Add account</h1><p class="subheading">Define an account for future accounting workflows.</p></div><a asp-action="Accounts" class="btn btn-outline-secondary">← Back to accounts</a></div>
+<div class="form-card"><form asp-action="CreateAccount" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="Code" class="form-label"></label><input asp-for="Code" class="form-control" placeholder="e.g. 6100" /><span asp-validation-for="Code" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Type" class="form-label"></label><select asp-for="Type" class="form-select"><option>Asset</option><option>Liability</option><option>Equity</option><option>Income</option><option>Expense</option></select></div>
+<div class="mb-3"><label asp-for="OpeningBalance" class="form-label"></label><input asp-for="OpeningBalance" type="number" step="0.01" class="form-control" /></div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" rows="2" class="form-control"></textarea></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Active account</label></div>
+<div class="d-flex gap-2"><button type="submit" class="btn btn-primary">Save account</button><a asp-action="Accounts" class="btn btn-light">Cancel</a></div></form></div>

@@ -1,0 +1,36 @@
+@model SalesOrder
+@{ ViewData["Title"] = "Create sales order"; var products = ViewBag.Products as List<Product> ?? new List<Product>(); }
+<div class="page-heading"><div><div class="eyebrow">Sales / New order</div><h1>Create sales order</h1><p class="subheading">Choose a customer, add products and set quantities. Available stock is checked before saving.</p></div><a asp-action="Index" class="btn btn-outline-secondary">← Back to orders</a></div>
+<div class="form-card"><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="row g-3"><div class="col-md-6"><label class="form-label" for="customerId">Customer</label><select class="form-select" id="customerId" name="customerId" asp-items="ViewBag.Customers"><option value="">Choose customer</option></select></div><div class="col-md-3"><label class="form-label" for="orderDate">Order date</label><input class="form-control" id="orderDate" name="orderDate" type="date" value="@(ViewBag.PostedDate ?? DateTime.Today.ToString("yyyy-MM-dd"))" required /></div><div class="col-md-3"><label class="form-label" for="status">Status</label><select class="form-select" id="status" name="status"><option>Pending</option><option>Processing</option><option>Completed</option><option>Cancelled</option></select></div></div>
+<hr class="my-4"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h6 fw-bold mb-0">Order items</h2><button type="button" id="addLine" class="btn btn-sm btn-outline-primary">＋ Add product line</button></div>
+<div id="orderLines" class="d-grid gap-2">
+<div class="row g-2 align-items-end order-line"><div class="col-md-8"><label class="form-label">Product</label><select name="productIds" class="form-select product-select" required><option value="">Choose product</option>@foreach (var p in products) { <option value="@p.Id" data-price="@p.UnitPrice">@p.Name — @p.SKU (stock: @p.StockQuantity, R @p.UnitPrice.ToString("N2"))</option> }</select></div><div class="col-md-3"><label class="form-label">Quantity</label><input name="quantities" class="form-control quantity-input" type="number" min="1" value="1" required /></div><div class="col-md-1"><button type="button" class="btn btn-outline-danger remove-line" aria-label="Remove product line">×</button></div></div>
+</div><div class="mt-3"><label class="form-label" for="notes">Order notes</label><textarea class="form-control" id="notes" name="notes" rows="2"></textarea></div>
+<div class="alert alert-info mt-3 mb-0 small">Creating an order reduces inventory immediately. Cancelling a saved order restores its quantities. This starter version does not process payments or issue tax invoices.</div>
+<div class="d-flex gap-2 mt-4"><button type="submit" class="btn btn-primary px-4">Create order</button><a asp-action="Index" class="btn btn-light">Cancel</a></div></form></div>
+@section Scripts {
+<script>
+(() => {
+ const lines = document.getElementById('orderLines');
+ const add = document.getElementById('addLine');
+ const template = lines.querySelector('.order-line');
+ function refreshRemoveButtons() {
+   const rows = lines.querySelectorAll('.order-line');
+   rows.forEach(row => { row.querySelector('.remove-line').disabled = rows.length === 1; });
+ }
+ add.addEventListener('click', () => {
+   const row = template.cloneNode(true);
+   row.querySelector('select').selectedIndex = 0;
+   row.querySelector('input').value = 1;
+   lines.appendChild(row);
+   refreshRemoveButtons();
+ });
+ lines.addEventListener('click', e => {
+   const btn = e.target.closest('.remove-line');
+   if (btn && lines.querySelectorAll('.order-line').length > 1) { btn.closest('.order-line').remove(); refreshRemoveButtons(); }
+ });
+ refreshRemoveButtons();
+})();
+</script>
+}

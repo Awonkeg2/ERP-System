@@ -1,0 +1,4 @@
+@model Product
+@{ ViewData["Title"] = "Delete product"; }
+<div class="page-heading"><div><div class="eyebrow">Inventory / Delete</div><h1>Delete product?</h1><p class="subheading">This action cannot be undone.</p></div></div>
+<div class="form-card"><div class="alert alert-warning">You are about to delete <strong>@Model.Name (@Model.SKU)</strong>.</div><p>Stock on hand: @Model.StockQuantity · Unit price: R @Model.UnitPrice.ToString("N2")</p><form asp-action="Delete" method="post"><input type="hidden" asp-for="Id" /><button class="btn btn-danger" type="submit">Delete product</button> <a asp-action="Index" class="btn btn-light">Cancel</a></form></div>

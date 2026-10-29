@@ -1,0 +1,14 @@
+@model Product
+@{ ViewData["Title"] = "Add product"; }
+<div class="page-heading"><div><div class="eyebrow">Workspace / Products</div><h1>Add product</h1><p class="subheading">Enter accurate details below. Fields marked required must be completed.</p></div><a class="btn btn-outline-secondary" asp-action="Index">← Back to list</a></div>
+<div class="form-card"><form asp-action="Create" method="post">
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="SKU" class="form-label">SKU / Code</label><input asp-for="SKU" type="text" class="form-control" /><span asp-validation-for="SKU" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Name" class="form-label">Product name</label><input asp-for="Name" type="text" class="form-control" /><span asp-validation-for="Name" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Category" class="form-label">Category</label><input asp-for="Category" type="text" class="form-control" /><span asp-validation-for="Category" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="UnitPrice" class="form-label">Unit price (R)</label><input asp-for="UnitPrice" type="text" class="form-control" step="0.01" /><span asp-validation-for="UnitPrice" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="StockQuantity" class="form-label">Stock quantity</label><input asp-for="StockQuantity" type="number" class="form-control" step="1" /><span asp-validation-for="StockQuantity" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="ReorderLevel" class="form-label">Reorder level</label><input asp-for="ReorderLevel" type="number" class="form-control" step="1" /><span asp-validation-for="ReorderLevel" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Description" class="form-label">Description</label><textarea asp-for="Description" class="form-control" rows="3"></textarea><span asp-validation-for="Description" class="text-danger small"></span></div>
+<div class="d-flex gap-2 mt-4"><button type="submit" class="btn btn-primary px-4">Save changes</button><a asp-action="Index" class="btn btn-light">Cancel</a></div></form></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

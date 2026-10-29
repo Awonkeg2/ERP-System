@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.suo
+
+# ASP.NET Core development secrets
+**/appsettings.Development.json
+
+# OS files
+.DS_Store
+Thumbs.db

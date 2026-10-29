@@ -1,0 +1,35 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="page-heading">
+    <div><div class="eyebrow">Business overview</div><h1>Good day. Here's your business at a glance.</h1><p class="subheading">A simple operational view of your ByteBridge workspace.</p></div>
+    <a class="btn btn-primary px-3 py-2" asp-controller="SalesOrders" asp-action="Create">＋ Create sales order</a>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3"><div class="metric-card"><div class="metric-top"><span>Inventory items</span><span class="metric-icon">▦</span></div><div class="metric-value">@Model.ProductCount</div><div class="metric-foot">Products tracked</div></div></div>
+    <div class="col-6 col-xl-3"><div class="metric-card"><div class="metric-top"><span>Customers</span><span class="metric-icon">♙</span></div><div class="metric-value">@Model.CustomerCount</div><div class="metric-foot">Customer records</div></div></div>
+    <div class="col-6 col-xl-3"><div class="metric-card"><div class="metric-top"><span>Pending orders</span><span class="metric-icon">◷</span></div><div class="metric-value">@Model.PendingOrders</div><div class="metric-foot">Orders awaiting action</div></div></div>
+    <div class="col-6 col-xl-3"><div class="metric-card"><div class="metric-top"><span>Inventory value</span><span class="metric-icon">R</span></div><div class="metric-value">R @Model.InventoryValue.ToString("N2")</div><div class="metric-foot">Stock on hand × unit price</div></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-xl-7">
+        <section class="panel">
+            <div class="panel-heading"><h2>Recent sales orders</h2><a asp-controller="SalesOrders" asp-action="Index" class="small text-decoration-none">View all →</a></div>
+            @if (Model.RecentOrders.Count == 0) { <div class="empty-state">No sales orders yet. Create your first order to get started.</div> }
+            else {
+                <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Status</th><th class="text-end">Total</th></tr></thead><tbody>
+                @foreach (var order in Model.RecentOrders) { <tr><td><a asp-controller="SalesOrders" asp-action="Details" asp-route-id="@order.Id" class="fw-bold text-decoration-none">@order.OrderNumber</a></td><td>@order.Customer?.Name</td><td>@order.OrderDate.ToString("dd MMM yyyy")</td><td><span class="status-pill status-@order.Status.ToLowerInvariant()">@order.Status</span></td><td class="text-end fw-semibold">R @order.Total.ToString("N2")</td></tr> }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+    <div class="col-xl-5">
+        <section class="panel">
+            <div class="panel-heading"><h2>Low-stock watchlist</h2><a asp-controller="Products" asp-action="Index" class="small text-decoration-none">Manage stock →</a></div>
+            @if (Model.LowStockProducts.Count == 0) { <div class="empty-state">Everything looks good. No products are at their reorder level.</div> }
+            else { <div class="table-responsive"><table class="table"><thead><tr><th>Product</th><th>Available</th><th>Reorder at</th></tr></thead><tbody>@foreach (var p in Model.LowStockProducts) { <tr><td><div class="fw-semibold">@p.Name</div><small class="text-secondary">@p.SKU</small></td><td><span class="stock-low">@p.StockQuantity left</span></td><td>@p.ReorderLevel</td></tr> }</tbody></table></div> }
+        </section>
+        <section class="panel mt-4"><div class="panel-heading"><h2>Quick actions</h2></div><div class="panel-body d-grid gap-2"><a class="btn btn-outline-primary text-start" asp-controller="Products" asp-action="Create">＋ Add a product</a><a class="btn btn-outline-primary text-start" asp-controller="Customers" asp-action="Create">＋ Add a customer</a><a class="btn btn-outline-primary text-start" asp-controller="Suppliers" asp-action="Create">＋ Add a supplier</a></div></section>
+    </div>
+</div>

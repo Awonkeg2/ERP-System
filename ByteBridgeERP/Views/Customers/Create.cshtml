@@ -1,0 +1,12 @@
+@model Customer
+@{ ViewData["Title"] = "Add customer"; }
+<div class="page-heading"><div><div class="eyebrow">Workspace / Customers</div><h1>Add customer</h1><p class="subheading">Enter accurate details below. Fields marked required must be completed.</p></div><a class="btn btn-outline-secondary" asp-action="Index">← Back to list</a></div>
+<div class="form-card"><form asp-action="Create" method="post">
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="Name" class="form-label">Customer / business name</label><input asp-for="Name" type="text" class="form-control" /><span asp-validation-for="Name" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Company" class="form-label">Company</label><input asp-for="Company" type="text" class="form-control" /><span asp-validation-for="Company" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Email" class="form-label">Email address</label><input asp-for="Email" type="email" class="form-control" /><span asp-validation-for="Email" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Phone" class="form-label">Phone number</label><input asp-for="Phone" type="text" class="form-control" /><span asp-validation-for="Phone" class="text-danger small"></span></div>
+<div class="mb-3"><label asp-for="Address" class="form-label">Address</label><textarea asp-for="Address" class="form-control" rows="3"></textarea><span asp-validation-for="Address" class="text-danger small"></span></div>
+<div class="d-flex gap-2 mt-4"><button type="submit" class="btn btn-primary px-4">Save changes</button><a asp-action="Index" class="btn btn-light">Cancel</a></div></form></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

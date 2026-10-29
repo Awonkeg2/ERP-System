@@ -1,0 +1,4 @@
+@model Customer
+@{ ViewData["Title"] = "Customer details"; }
+<div class="page-heading"><div><div class="eyebrow">Customers / Details</div><h1>@Model.Name</h1><p class="subheading">Customer record</p></div><div class="action-links"><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit customer</a><a asp-action="Index" class="btn btn-outline-secondary">Back</a></div></div>
+<div class="form-card"><dl class="row mb-0"><dt class="col-sm-4">Company</dt><dd class="col-sm-8">@(Model.Company ?? "—")</dd><dt class="col-sm-4">Email</dt><dd class="col-sm-8">@(Model.Email ?? "—")</dd><dt class="col-sm-4">Phone</dt><dd class="col-sm-8">@(Model.Phone ?? "—")</dd><dt class="col-sm-4">Address</dt><dd class="col-sm-8">@(Model.Address ?? "—")</dd><dt class="col-sm-4">Created</dt><dd class="col-sm-8">@Model.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")</dd></dl></div>

@@ -1,0 +1,4 @@
+@model Supplier
+@{ ViewData["Title"] = "Delete supplier"; }
+<div class="page-heading"><div><div class="eyebrow">Suppliers / Delete</div><h1>Delete supplier?</h1><p class="subheading">This action cannot be undone.</p></div></div>
+<div class="form-card"><div class="alert alert-warning">You are about to delete <strong>@Model.Name</strong>.</div><form asp-action="Delete" method="post"><input type="hidden" asp-for="Id" /><button class="btn btn-danger" type="submit">Delete supplier</button> <a asp-action="Index" class="btn btn-light">Cancel</a></form></div>

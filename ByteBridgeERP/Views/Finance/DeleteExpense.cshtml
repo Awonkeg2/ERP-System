@@ -1,0 +1,4 @@
+@model Expense
+@{ ViewData["Title"] = "Delete expense"; }
+<div class="page-heading"><div><div class="eyebrow">Finance / Expenses</div><h1>Delete expense?</h1><p class="subheading">This removes the expense record from this prototype.</p></div></div>
+<div class="form-card"><div class="alert alert-warning">Delete <strong>@Model.Reference — @Model.Description</strong> for R @Model.Amount.ToString("N2")?</div><form asp-action="DeleteExpense" method="post"><input type="hidden" asp-for="Id" /><button type="submit" class="btn btn-danger">Delete expense</button> <a asp-action="Expenses" class="btn btn-light">Cancel</a></form></div>

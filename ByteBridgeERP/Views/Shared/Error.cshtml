@@ -1,0 +1,4 @@
+@model ErrorViewModel
+@{ ViewData["Title"] = "Error"; }
+<div class="page-heading"><div><div class="eyebrow">System</div><h1>Something went wrong</h1><p class="subheading">The request could not be completed.</p></div></div>
+<div class="form-card"><p>Please try again. If the problem continues, check the application logs.</p>@if (Model.ShowRequestId) { <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p> }</div>
